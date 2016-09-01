@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>日历</title>
+    <style type="text/css">
+      .title {
+        padding: 10px;
+        text-align: center;
+      }
+      
+      table {
+        width: 100%;
+        border: 1px solid #fff;
+      }
+      
+      th,
+      td {
+        text-align: center;
+        border: 1px solid #fff;
+        background: #eee;
+      }
+      
+      .valid {
+        color: #333;
+      }
+      
+      .invalid {
+        color: #aaa;
+      }
+      
+      .today {
+        color: #f00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title">2015年09月24号</div>
+    <div id="date1"></div>
+    <div class="title">今天的时期</div>
+    <div id="date2"></div>
+    <script type="text/javascript" src="js/date-chooser.js"></script>
+    <script type="text/javascript">
+      var dateArray = dateChooser({
+        year: 2015,
+        month: 09,
+        day: 24
+      });
+      var dateTable = function(data) {
+        var _html = "<table><tr><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>";
+        for(var i = 0; i < data.length; i++) {
+          if(i % 7 === 0) {
+            _html += "<tr><td class='" + (data[i].state === 1 ? "valid" : (data[i].state === -1 ? "invalid" : "today")) + "'>" + data[i].value + "</td>";
+          } else if(i % 7 === 6) {
+            _html += "<td class='" + (data[i].state === 1 ? "valid" : (data[i].state === -1 ? "invalid" : "today")) + "'>" + data[i].value + "</td></tr>";
+          } else {
+            _html += "<td class='" + (data[i].state === 1 ? "valid" : (data[i].state === -1 ? "invalid" : "today")) + "'>" + data[i].value + "</td>";
+          }
+        }
+        _html += "</table>";
+        return _html;
+      };
+      document.getElementById("date1").innerHTML = dateTable(dateArray);
+      document.getElementById("date2").innerHTML = dateTable(dateChooser());
+    </script>
+  </body>
+
+</html>
