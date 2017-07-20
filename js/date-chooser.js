@@ -24,23 +24,19 @@
       case 10:
       case 12:
         return 31;
-        break;
       case 4:
       case 6:
       case 9:
       case 11:
         return 30;
-        break;
       case 2:
         if(leapYear(date.year)) {
           return 29;
         } else {
           return 28;
         }
-        break;
       default:
         return 30;
-        break;
     }
   };
   /* 对象扩展  */
